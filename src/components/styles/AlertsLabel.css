@@ -1,0 +1,42 @@
+.alert-label-container {
+    margin-top: 15px;
+    padding: 10px 16px;
+    background-color: #FFF3E0;
+    color: var(--itau-orange);
+    border: 1px solid rgba(236, 112, 0, 0.3);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.alert-label-container.game-over {
+    background-color: #E3F2FD;
+    color: var(--itau-blue);
+    border-color: rgba(0, 73, 144, 0.3);
+}
+
+.restart-button {
+    background-color: var(--itau-blue);
+    color: var(--white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 800;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}

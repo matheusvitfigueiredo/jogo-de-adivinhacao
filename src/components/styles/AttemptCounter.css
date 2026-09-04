@@ -1,0 +1,28 @@
+.attempt-counter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.attempt-number {
+    color: var(--gray);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.attempt-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--itau-blue);
+    text-transform: uppercase;
+}
+

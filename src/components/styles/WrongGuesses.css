@@ -1,0 +1,25 @@
+.wrong-guesses-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background-color: #FFF3E0;
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 1px solid rgba(236, 112, 0, 0.2);
+}
+
+.wrong-guesses-label {
+    color: var(--itau-blue);
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.wrong-guesses-letters {
+    color: var(--error-red);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
