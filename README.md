@@ -1,75 +1,42 @@
-# React + TypeScript + Vite
+# Jogo de Adivinhação
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto prático de desenvolvimento Frontend: um clássico **Jogo de Adivinhação de Palavras**, desenvolvido com **React** e **TypeScript**.
 
-Currently, two official plugins are available:
+## Como rodar o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Este projeto foi inicializado com [Vite](https://vitejs.dev/). Siga os passos abaixo para rodar localmente:
 
-## React Compiler
+1. **Pré-requisitos**: Certifique-se de ter o [Node.js](https://nodejs.org/) instalado na sua máquina.
+2. **Instalar Dependências**:
+   Abra o terminal na pasta raiz do projeto (`jogo-de-adivinhacao`) e rode o comando:
+   ```bash
+   npm install
+   ```
+3. **Rodar o Servidor de Desenvolvimento**:
+   Ainda no terminal, execute:
+   ```bash
+   npm run dev
+   ```
+4. **Jogar**: O terminal exibirá um link (geralmente `http://localhost:5173`). Clique nele ou cole no seu navegador para acessar a interface.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🏗️ Arquitetura e Decisões Técnicas
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+O projeto foi construído pensando em **escalabilidade**, **manutenibilidade** e **Clean Code**. A principal decisão arquitetural foi separar rigorosamente a Camada Visual (UI) da Camada de Regras de Negócio (Lógica).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 1. Separação de Responsabilidades (Custom Hooks)
+Toda a inteligência do jogo vive isolada no arquivo `src/hooks/useGame.ts`.
+- O `App.tsx` não sabe *como* o jogo funciona, ele apenas renderiza a tela com base nas informações que o Hook repassa.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 2. Componentes de Apresentação (Dumb Components)
+Os componentes na pasta `src/components/` (`AttemptCounter`, `GuessInput`, `SecretWord`, etc.) são puramente visuais. 
+Eles recebem dados via `props` e apenas desenham na tela. Eles não possuem estados complexos (exceção para o input de digitação que gerencia seu estado local temporário), tornando-os facilmente testáveis e reutilizáveis.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Tratamento Avançado de Strings
+O jogo foi pensado para a língua portuguesa. A função `normalizeWord` (no `useGame.ts`) utiliza a API do JavaScript **(NFD)** para remover acentuações (`Á` -> `A`, `Ç` -> `C`) invisivelmente por debaixo dos panos. Assim, não punimos o usuário caso ele digite uma letra acentuada por engano, mantendo a experiência fluida. O uso de Regex garante que apenas letras de A-Z diminuam o número de tentativas, blindando o jogo contra números ou caracteres especiais.
 
-```
+### 4. Estilização Temática e Responsividade
+Os estilos foram aplicados utilizando CSS nativo, organizados na pasta `styles/` perto de seus respectivos componentes.
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+---

@@ -1,0 +1,35 @@
+.guess-input-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
+}
+
+.guess-input-container input {
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+    width: 160px;
+    color: var(--itau-blue);
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.guess-input-container input:focus {
+    border-color: var(--itau-orange);
+}
+
+.guess-input-container button {
+    padding: 7px 14px;
+    font-size: 1rem;
+    background-color: var(--itau-orange);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+}
